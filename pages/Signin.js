@@ -50,7 +50,7 @@ export default function Signin({ navigation }) {
 
         {/* Additional Options */}
         <View style={styles.options}>
-          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={styles.linkText}>Create an Account</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>

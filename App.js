@@ -17,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Navigator
-        initialRouteName="SignIn"
+        initialRouteName="SignUp"
         screenOptions={{
           headerShown: false, // headerMode="none" is deprecated so don't use that
         }}
