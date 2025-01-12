@@ -8,6 +8,8 @@ import AboutUsPage from './pages/Aboutus.js';
 import ReachOutPage from './pages/Reachout.js';
 import AccountInfoPage from './pages/Accountinfo.js';
 import BookingPage from './pages/Booking.js'
+import SignInPage from './pages/Signin.js'
+import SignUpPage from './pages/Signup.js'
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -15,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Navigator
-        initialRouteName="Booking"
+        initialRouteName="SignIn"
         screenOptions={{
           headerShown: false, // headerMode="none" is deprecated so don't use that
         }}
@@ -26,6 +28,8 @@ export default function App() {
         <Screen name="ReachOut" component={ReachOutPage} />
         <Screen name="AccountInfo" component={AccountInfoPage} />
         <Screen name="Booking" component={BookingPage} />
+        <Screen name="SignIn" component={SignInPage} />
+        <Screen name="SignUp" component={SignUpPage} />
       </Navigator>
     </NavigationContainer>
   );
