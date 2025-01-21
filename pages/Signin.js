@@ -6,11 +6,15 @@ import {
   TextInput,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
+
+import SpotLogo from '../assets/SpotLogo.png';
 
 export default function Signin({ navigation }) {
   const handleSignIn = () => {
     console.log('Sign In button pressed');
+    navigation.navigate('MainPage');
     // Add your sign-in logic here
   };
 
@@ -19,7 +23,7 @@ export default function Signin({ navigation }) {
       {/* Logo Placeholder */}
       <View style={styles.logoContainer}>
         <View style={styles.logoPlaceholder}>
-          {/* Replace this View with an Image for your logo */}
+          <Image style={styles.logo} source={SpotLogo} />
         </View>
       </View>
 
@@ -68,6 +72,7 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: 'center',
     backgroundColor: '#f9f9f9',
+    fontFamily: 'sans-serif',
   },
   logoContainer: {
     alignItems: 'center',
@@ -78,6 +83,9 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: '#e0e0e0',
     borderRadius: 8,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   form: {
     display: 'flex',
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   title: {
-    fontSize: 24,
+    fontSize: '3rem',
     fontWeight: '700',
     color: '#333',
     marginBottom: 24,
@@ -104,15 +112,17 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   button: {
-    height: 48,
+    height: '3rem',
+    width: '10rem',
     backgroundColor: '#007aff',
     borderRadius: 8,
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     marginTop: 16,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: '2rem',
     fontWeight: '600',
     color: '#fff',
   },
@@ -124,5 +134,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#007aff',
     marginTop: 8,
+  },
+  logo: {
+    width: 90,
+    height: 90,
+    borderRadius: 8,
   },
 });
