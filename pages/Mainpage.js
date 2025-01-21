@@ -45,10 +45,30 @@ export default function App({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Available Restaurants</Text>
-
+            <View style={styles.header}>
+                <Text style={styles.title}>Available Restaurants</Text>
+                <View style={styles.iconContainer}>
+                    <Icon 
+                        name="user" 
+                        size={Platform.OS === 'web' ? 48 : 36} 
+                        color="#000" 
+                        style={styles.icon} 
+                        onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+                        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                        onClick={() => navigation.navigate('Profile')} 
+                    />
+                    <Icon 
+                        name="cog" 
+                        size={Platform.OS === 'web' ? 48 : 36} 
+                        color="#000" 
+                        style={styles.icon} 
+                        onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+                        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                        onClick={() => navigation.navigate('Settings')} 
+                    />
+                </View>
+            </View>
             <View style={styles.divider}/>
-
             <View style={styles.restaurantContainer}>
                 {restaurants.map((restaurant, index) => (
                     <View 
@@ -66,6 +86,7 @@ export default function App({ navigation }) {
                                     name="star" 
                                     size={Platform.OS === 'web' ? 32 : 24} 
                                     color={i < Math.floor(restaurant.rating) ? '#FFD700' : '#d3d3d3'}
+                                    style={styles.star}
                                 />
                             ))}
                         </View>
@@ -73,6 +94,7 @@ export default function App({ navigation }) {
                     </View>
                 ))}
             </View>
+            <Text style={styles.comingSoon}>More Coming Soon...</Text>
         </View>
     );
 }
@@ -82,11 +104,26 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         display: 'flex',
     },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+    },
     title: {
         fontSize: Platform.OS === 'web' ? 48 : 32,
         fontWeight: 'bold',
         marginVertical: 30,
-        alignSelf: 'center',
+        textAlign: 'center',
+        flex: 1,
+    },
+    iconContainer: {
+        flexDirection: 'row',
+    },
+    icon: {
+        marginLeft: 20,
+        transition: 'all 0.3s ease-in-out',
+        cursor: 'pointer',
     },
     restaurantContainer: {
         display: 'flex',
@@ -103,6 +140,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         shadowColor: '#000',
         transition: 'all 0.3s ease-in-out',
+        cursor: 'pointer',
     },
     cardHovered: {
         transform: [{ scale: 1.05 }],
@@ -130,11 +168,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     ratingContainer: {
+        flexDirection: 'row',
         marginTop: 10,
     },
     details: {
         fontSize: Platform.OS === 'web' ? 28 : 20,
         color: '#555',
         marginTop: 10,
+    },
+    comingSoon: {
+        fontSize: Platform.OS === 'web' ? 48 : 36,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 50,
     },
 });
