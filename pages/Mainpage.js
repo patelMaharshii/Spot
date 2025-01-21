@@ -1,23 +1,22 @@
 import { StyleSheet, Text, View, Image, Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useState } from 'react';
 
 import indianFoodImg from '../assets/indian-food.png';
 import pizzaImg from '../assets/pizza.jpg';
 import shawarmaImg from '../assets/shawarma.png';
-import profilePicImg from '../assets/profilePic.png';
-import starImg from '../assets/star.png';
 
 const { width } = Dimensions.get('window');
 
 export default function App({ navigation }) {
-    const restaurants = [
+    const [restaurants, setRestaurants ] = useState([
         {
             name: 'Indian Food',
             image: indianFoodImg,
             rating: 4.5,
             price: '$',
             distance: '1.5 km',
-            bookmarked: true
+            hovered: false,
         },
         {
             name: 'Pizza',
@@ -25,7 +24,7 @@ export default function App({ navigation }) {
             rating: 4.0,
             price: '$$',
             distance: '2.0 km',
-            bookmarked: false
+            hovered: false
         },
         {
             name: 'Shawarma',
@@ -33,16 +32,31 @@ export default function App({ navigation }) {
             rating: 3.5,
             price: '$',
             distance: '2.5 km',
-            bookmarked: true
+            hovered: false
         }
-    ];
+    ]);
+
+    const handleHover = (index, hoverState) => {
+        const updatedRestaurants = restaurants.map((restaurant, i) =>
+            i === index ? { ...restaurant, hovered: hoverState } : restaurant
+        );
+        setRestaurants(updatedRestaurants);
+    };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Available Restaurants</Text>
+
+            <View style={styles.divider}/>
+
             <View style={styles.restaurantContainer}>
-                {restaurants.map((restaurant    , index) => (
-                    <View key={index} style={styles.card}>
+                {restaurants.map((restaurant, index) => (
+                    <View 
+                        key={index} 
+                        style={[styles.card, restaurant.hovered && styles.cardHovered]}
+                        onMouseEnter={() => handleHover(index, true)}
+                        onMouseLeave={() => handleHover(index, false)}
+                    >
                         <Image source={restaurant.image} style={styles.image} />
                         <Text style={styles.text}>{restaurant.name}</Text>
                         <View style={styles.ratingContainer}>
@@ -58,9 +72,6 @@ export default function App({ navigation }) {
                         <Text style={styles.details}>{restaurant.rating} · {restaurant.price} · {restaurant.distance}</Text>
                     </View>
                 ))}
-                <View style={styles.restaurantContainerRight}>
-
-                </View>
             </View>
         </View>
     );
@@ -82,16 +93,28 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'space-around',
     },
-    restaurantContainerLeft: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
     card: {
         width: '25%',
         backgroundColor: '#f8f8f8',
         padding: 40,
         margin: '1.66%',
         borderRadius: 10,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        shadowColor: '#000',
+        transition: 'all 0.3s ease-in-out',
+    },
+    cardHovered: {
+        transform: [{ scale: 1.05 }],
+        boxShadow: '0 0 20px #60b4d3',
+        borderWidth: 2,
+    },
+    divider: {
+        height: 3,
+        backgroundColor: '#ccc',
+        marginVertical: 10,
+        width: '95%',
+        alignSelf: 'center',
     },
     image: {
         width: '100%',
